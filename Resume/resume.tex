@@ -1,0 +1,134 @@
+\documentclass[10pt,letterpaper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+
+% Colors
+\definecolor{primary}{RGB}{10, 37, 64}
+\definecolor{textdark}{RGB}{33, 37, 41}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+% Setup hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    pdftitle={Mohammed Rashid Chowdhury - Resume},
+    pdfauthor={Mohammed Rashid Chowdhury}
+}
+
+% Section formatting
+\titleformat{\section}
+  {\large\bfseries\color{primary}\uppercase}
+  {}{0em}
+  {}[\titlerule]
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+
+% Itemize settings
+\setlist[itemize]{leftmargin=1.2em, itemsep=1.5pt, parsep=0pt, topsep=1.5pt}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% Header
+\begin{center}
+    {\Huge \bfseries \color{primary} Mohammed Rashid Chowdhury} \\[4pt]
+    \small
+    Contact No: +1 (306)-717-3271 \quad$\cdot$\quad Email: \href{mailto:mohammed.rashid.chowdhury.shuklo@gmail.com}{mohammed.rashid.chowdhury.shuklo@gmail.com} \\
+    Location: Toronto, ON, Canada \quad$\cdot$\quad LinkedIn: \href{https://www.linkedin.com/in/mohammed-rashid-chowdhury}{linkedin.com/in/mohammed-rashid-chowdhury} \\
+    GitHub: \href{https://github.com/rashid0531}{github.com/rashid0531} \quad$\cdot$\quad Google Scholar: \href{http://tinyurl.com/googlescholarrashid}{tinyurl.com/googlescholarrashid}
+\end{center}
+
+\vspace{-4pt}
+
+% Professional Summary
+\section{Professional Summary}
+Senior Engineer with 7+ years of experience specializing in Machine Learning and Large-Scale Data Engineering. Proven track record of architecting GenAI/RAG pipelines, optimizing petabyte-scale Spark workloads, and deploying cloud-native AI products. Expert in bridging the gap between complex AI research and production-ready software solutions for enterprise clients.
+
+% Experience
+\section{Experience}
+
+\noindent
+\textbf{\large Senior Machine Learning \& Data Engineer} \hfill \textbf{May 2022 -- Present} \\
+\textit{\color{primary} CGI Inc. \quad$\cdot$\quad Toronto, ON (Remote)}
+\begin{itemize}
+    \item \textbf{Advanced AI Product Development:} Engineered high-performance RAG (Retrieval-Augmented Generation) pipelines by integrating LangChain with Neo4j knowledge graphs and FAISS vector stores, enabling context-aware retrieval and improving user engagement by 50\%.
+    \item \textbf{Intelligent Data Deduplication \& Reconciliation:} Designed and deployed a BERT-based entity matching solution using TensorFlow to automate data deduplication and reconciliation across disparate enterprise datasets.
+    \item \textbf{Internal AI Strategy \& Adoption:} Partnered directly with cross-functional teams to define architecture standards and cost-efficient POCs for cloud-native ML services, facilitating the adoption of AI tools across the organization.
+    \item \textbf{Distributed Data Engineering:} Optimized large-scale Apache Spark workloads and Delta Lake tables, reducing query latency and operational overhead by 40\%.
+    \item \textbf{AI Reliability \& Compliance:} Orchestrated data lineage and PII anonymization using Databricks Unity Catalog to ensure regulatory compliance and high-fidelity data for AI experimentation.
+\end{itemize}
+
+\vspace{4pt}
+
+\noindent
+\textbf{\large Machine Learning / Data Engineer II (MLOps Team)} \hfill \textbf{July 2021 -- May 2022} \\
+\textit{\color{primary} Bell Canada \quad$\cdot$\quad Toronto, ON}
+\begin{itemize}
+    \item \textbf{Real-Time AI Infrastructure:} Engineered event-driven pipelines using Apache Kafka and Spark Structured Streaming to process high-velocity telemetry data with sub-second latency, enabling automated model re-training and real-time inference.
+    \item \textbf{Production API Engineering:} Deployed ML models as production-ready, high-throughput API endpoints using BentoML and FastAPI, ensuring scalable delivery of model predictions to downstream microservices.
+    \item \textbf{Model Observability \& Integrity:} Developed a drift detection framework using Prometheus, Grafana, and Python to monitor statistical deviations (KL-divergence/KS-test) in production data, ensuring the reliability of AI outcomes.
+    \item \textbf{Cloud-Native Deployment:} Orchestrated Jenkins CI/CD pipelines for containerized workloads on Kubernetes/OpenShift; utilized multi-stage Docker builds to reduce image footprints by 50\%, accelerating deployment cycles and reducing storage overhead.
+    \item \textbf{Automated Quality Gates:} Designed data quality management processes to detect anomalies in source datasets, preventing corrupted data from entering the training lifecycle.
+\end{itemize}
+
+\vspace{4pt}
+
+\noindent
+\textbf{\large Software Engineer (Machine Learning Framework)} \hfill \textbf{February 2019 -- July 2021} \\
+\textit{\color{primary} Siemens Digital Industries Software \quad$\cdot$\quad Saskatoon, SK}
+\begin{itemize}
+    \item \textbf{Performance Engineering:} Accelerated application start times by 2x using cProfile for bottleneck identification and implementing high-performance caching with Redis and Python generators.
+    \item \textbf{Algorithmic Development:} Implemented proprietary ML algorithms for chip verification using Python, C++, and Cython to enhance computational efficiency.
+    \item \textbf{Cloud Infrastructure:} Collaborated with DevOps to streamline CI/CD using AWS (ECR, ECS, CodePipeline) and Ansible for scalable tool deployment.
+\end{itemize}
+
+\vspace{4pt}
+
+\noindent
+\textbf{\large Graduate Research Assistant (Parallel and Distributed Programming)} \hfill \textbf{September 2016 -- February 2019} \\
+\textit{\color{primary} DISCUS lab, University of Saskatchewan \quad$\cdot$\quad Saskatoon, SK}
+\begin{itemize}
+    \item \textbf{Distributed Computing:} Scaled a CNN-based flower counting application by $\sim$7X on multi-GPU clusters using TensorFlow (Parameter Server), Horovod (Ring Reduce), and OpenMPI (communication).
+    \item \textbf{System Performance:} Accelerated image registration tasks by $\sim$3x using CUDA C++ and Cython, implementing custom resource scheduling for efficient GPU utilization.
+    \item \textbf{Big Data Processing:} Developed distributed data processing pipelines using Apache Spark, HDFS, and Hive to manage and analyze high-volume image datasets.
+\end{itemize}
+
+% Technical Skills
+\section{Technical Skills}
+\begin{itemize}[label={}, leftmargin=0pt]
+    \item \textbf{AI \& GenAI:} Large Language Models (LLMs), RAG Pipelines, LangChain, FAISS, Embeddings, AI Agents, TensorFlow, BERT.
+    \item \textbf{Data Engineering:} Apache Spark (PySpark), Kafka, Delta Lake, Hive, Airflow, Hadoop, ETL/ELT.
+    \item \textbf{Cloud \& DevOps:} GCP (Vertex AI, GCS), Azure, AWS, Docker, Kubernetes (GKE/OpenShift), CI/CD (Jenkins, Azure DevOps), Terraform.
+    \item \textbf{Languages \& Tools:} Python (Expert), SQL, Bash, C++, FastAPI, MLflow, Prometheus, Grafana.
+\end{itemize}
+
+% Education
+\section{Education}
+\begin{itemize}
+    \item \textbf{M.Sc. in Computer Science} -- University of Saskatchewan \hfill (Sep 2016 -- Feb 2019)
+    \item \textbf{B.Sc. in Computer Science and Engineering} -- North South University, Dhaka, Bangladesh \hfill (May 2009 -- Sep 2015)
+\end{itemize}
+
+% Certifications
+\section{Certifications}
+\begin{itemize}
+    \item \textbf{Certified Azure Data Engineer Associate}, Microsoft \hfill (2024 -- 2025)
+\end{itemize}
+
+% Awards
+\section{Awards}
+\begin{itemize}
+    \item \textbf{CGI Impact Award (NCR F23 Q2)} -- Awarded for exceeding expectations and making significant contributions that benefit CGI Stakeholders (GC - NextGen).
+    \item \textbf{Winner of Emerging Agriculture Hackathon 2017} -- First place for building an image processing application identifying crop pest infestations and plant nutrient deficiencies. (\href{http://bit.ly/agricultural-hackathon-2017}{Media coverage link})
+    \item \textbf{Faculty Scholarship Award} -- Awarded for academic achievement covering full cost of Master's Degree program at U of S.
+\end{itemize}
+
+\end{document}
