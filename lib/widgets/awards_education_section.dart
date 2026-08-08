@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_theme.dart';
+import 'hover_card.dart';
 
 class AwardsEducationSection extends StatelessWidget {
   const AwardsEducationSection({super.key});
-
-  Future<void> _launchUrl(String urlString) async {
-    final Uri uri = Uri.parse(urlString);
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      debugPrint('Could not launch $urlString');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +30,7 @@ class AwardsEducationSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Text(
+                  const Text(
                     'CERTIFICATIONS & AWARDS',
                     style: TextStyle(
                       fontFamily: 'FiraCode',
@@ -72,7 +64,10 @@ class AwardsEducationSection extends StatelessWidget {
                     spacing: 24,
                     runSpacing: 24,
                     children: PortfolioData.awards.map((award) {
-                      return _awardCard(context, award, cardWidth);
+                      return SizedBox(
+                        width: cardWidth,
+                        child: _awardCard(context, award),
+                      );
                     }).toList(),
                   );
                 },
@@ -84,109 +79,91 @@ class AwardsEducationSection extends StatelessWidget {
     );
   }
 
-  Widget _awardCard(BuildContext context, AwardItem award, double width) {
-    return Container(
-      width: width,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppTheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.cardBorder),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppTheme.amberAccent.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
+  Widget _awardCard(BuildContext context, AwardItem award) {
+    return HoverCard(
+      hoverBorderColor: AppTheme.amberAccent,
+      borderRadius: BorderRadius.circular(16),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppTheme.amberAccent.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.emoji_events_outlined,
+                color: AppTheme.amberAccent,
+                size: 28,
+              ),
             ),
-            child: const FaIcon(
-              FontAwesomeIcons.trophy,
-              color: AppTheme.amberAccent,
-              size: 24,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        award.title,
-                        style: const TextStyle(
-                          fontFamily: 'Outfit',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.textPrimary,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          award.title,
+                          style: const TextStyle(
+                            fontFamily: 'Outfit',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.textPrimary,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      award.period,
-                      style: const TextStyle(
-                        fontFamily: 'FiraCode',
-                        fontSize: 12,
-                        color: AppTheme.textMuted,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  award.issuer,
-                  style: const TextStyle(
-                    fontFamily: 'Outfit',
-                    fontSize: 14,
-                    color: AppTheme.blueAccent,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  award.description,
-                  style: const TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 13,
-                    color: AppTheme.textSecondary,
-                    height: 1.5,
-                  ),
-                ),
-                if (award.link != null) ...[
-                  const SizedBox(height: 12),
-                  InkWell(
-                    onTap: () => _launchUrl(award.link!),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Text(
-                          'View Coverage & Media Link',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 13,
-                            color: AppTheme.cyanAccent,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.surfaceLight,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppTheme.cardBorder),
+                        ),
+                        child: Text(
+                          award.period,
+                          style: const TextStyle(
+                            fontFamily: 'FiraCode',
+                            fontSize: 12,
+                            color: AppTheme.amberAccent,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(width: 4),
-                        Icon(
-                          Icons.open_in_new,
-                          size: 14,
-                          color: AppTheme.cyanAccent,
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    award.issuer,
+                    style: const TextStyle(
+                      fontFamily: 'Outfit',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.amberAccent,
                     ),
-                  )
-                ]
-              ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    award.description,
+                    style: const TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 13,
+                      color: AppTheme.textSecondary,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

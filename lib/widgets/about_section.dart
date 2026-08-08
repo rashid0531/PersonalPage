@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'hover_card.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -29,7 +30,7 @@ class AboutSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Text(
+                  const Text(
                     'ABOUT ME',
                     style: TextStyle(
                       fontFamily: 'FiraCode',
@@ -125,53 +126,47 @@ class AboutSection extends StatelessWidget {
     required IconData icon,
     required Color accentColor,
   }) {
-    return Container(
+    return SizedBox(
       width: width,
-      padding: const EdgeInsets.all(28),
-      decoration: BoxDecoration(
-        color: AppTheme.surface,
+      child: HoverCard(
+        hoverBorderColor: accentColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.cardBorder),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: accentColor, size: 28),
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'Outfit',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.textPrimary,
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: accentColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 14,
-                    color: AppTheme.textSecondary,
-                    height: 1.5,
-                  ),
+                child: Icon(icon, color: accentColor, size: 28),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontFamily: 'Outfit',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textPrimary,
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 14,
+                  color: AppTheme.textSecondary,
+                  height: 1.5,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

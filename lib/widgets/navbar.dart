@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_theme.dart';
+import 'resume_request_modal.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final Function(int) onNavItemSelected;
@@ -31,7 +32,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 70,
       decoration: BoxDecoration(
-        color: AppTheme.background.withValues(alpha: 0.85),
+        color: AppTheme.background.withValues(alpha: 0.95),
         border: const Border(
           bottom: BorderSide(color: AppTheme.cardBorder),
         ),
@@ -51,18 +52,19 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
                           gradient: AppTheme.cyanBlueGradient,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
                           'MRC',
                           style: TextStyle(
                             fontFamily: 'Outfit',
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 16,
+                            color: Colors.white,
+                            fontSize: 15,
                           ),
                         ),
                       ),
@@ -110,22 +112,21 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     const SizedBox(width: 12),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: AppTheme.cyanAccent,
+                        backgroundColor: AppTheme.blueAccent,
+                        foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 14),
+                            horizontal: 18, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: AppTheme.cyanAccent),
                         ),
                       ),
-                      onPressed: () =>
-                          _launchUrl('mailto:${PortfolioData.email}'),
+                      onPressed: () => ResumeRequestModal.show(context),
                       child: const Text(
-                        'Contact Me',
+                        'Request Resume',
                         style: TextStyle(
                           fontFamily: 'Outfit',
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -157,7 +158,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               fontFamily: 'Outfit',
               fontSize: 15,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-              color: isSelected ? AppTheme.cyanAccent : AppTheme.textSecondary,
+              color: isSelected ? AppTheme.blueAccent : AppTheme.textSecondary,
             ),
           ),
         ),
@@ -174,7 +175,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       icon: FaIcon(icon, size: 18, color: AppTheme.textSecondary),
       tooltip: tooltip,
       onPressed: onPressed,
-      hoverColor: AppTheme.cyanAccent.withValues(alpha: 0.1),
+      hoverColor: AppTheme.blueAccent.withValues(alpha: 0.1),
     );
   }
 }

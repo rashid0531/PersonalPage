@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_theme.dart';
+import 'hover_card.dart';
 
 class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
@@ -36,7 +37,7 @@ class _SkillsSectionState extends State<SkillsSection> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Text(
+                  const Text(
                     'TECHNICAL SKILLS',
                     style: TextStyle(
                       fontFamily: 'FiraCode',
@@ -78,16 +79,16 @@ class _SkillsSectionState extends State<SkillsSection> {
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.w600,
                               color: isSelected
-                                  ? Colors.black
+                                  ? Colors.white
                                   : AppTheme.textSecondary,
                             ),
                           ),
                           selected: isSelected,
-                          selectedColor: AppTheme.cyanAccent,
+                          selectedColor: AppTheme.blueAccent,
                           backgroundColor: AppTheme.surface,
                           side: BorderSide(
                             color: isSelected
-                                ? AppTheme.cyanAccent
+                                ? AppTheme.blueAccent
                                 : AppTheme.cardBorder,
                           ),
                           onSelected: (selected) {
@@ -105,76 +106,52 @@ class _SkillsSectionState extends State<SkillsSection> {
               ),
               const SizedBox(height: 32),
 
-              // Skills Chips Matrix Display
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: AppTheme.surface,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppTheme.cardBorder),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      PortfolioData
-                          .skillCategories[_selectedCategoryIndex].categoryName,
-                      style: const TextStyle(
-                        fontFamily: 'Outfit',
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: AppTheme.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
-                      children: PortfolioData
-                          .skillCategories[_selectedCategoryIndex].skills
-                          .map((skill) {
-                        return Container(
+              // Skills Chip Grid
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final category =
+                      PortfolioData.skillCategories[_selectedCategoryIndex];
+
+                  return Wrap(
+                    spacing: 14,
+                    runSpacing: 14,
+                    children: category.skills.map((skill) {
+                      return HoverCard(
+                        hoverBorderColor: AppTheme.blueAccent,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                              horizontal: 18, vertical: 12),
                           decoration: BoxDecoration(
-                            color: AppTheme.surfaceLight,
+                            color: AppTheme.surface,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: AppTheme.cyanAccent.withValues(alpha: 0.3)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppTheme.cyanAccent.withValues(alpha: 0.05),
-                                blurRadius: 8,
-                                spreadRadius: 1,
-                              )
-                            ],
+                            border: Border.all(color: AppTheme.cardBorder),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(
-                                Icons.code,
+                                Icons.check_circle_outline,
                                 size: 16,
                                 color: AppTheme.cyanAccent,
                               ),
-                              const SizedBox(width: 8),
+                              const SizedBox(width: 10),
                               Text(
                                 skill,
                                 style: const TextStyle(
-                                  fontFamily: 'Outfit',
-                                  fontSize: 15,
+                                  fontFamily: 'FiraCode',
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: AppTheme.textPrimary,
                                 ),
                               ),
                             ],
                           ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                },
               ),
             ],
           ),

@@ -5,12 +5,14 @@ class HoverCard extends StatefulWidget {
   final Widget child;
   final BorderRadius? borderRadius;
   final Color? hoverBorderColor;
+  final Color? backgroundColor;
 
   const HoverCard({
     super.key,
     required this.child,
     this.borderRadius,
     this.hoverBorderColor,
+    this.backgroundColor,
   });
 
   @override
@@ -22,41 +24,53 @@ class _HoverCardState extends State<HoverCard> {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBorderRadius =
-        widget.borderRadius ?? BorderRadius.circular(16);
-    final borderColor = _isHovered
-        ? (widget.hoverBorderColor ?? AppTheme.cyanAccent)
-        : AppTheme.cardBorder;
+    final borderRadius = widget.borderRadius ?? BorderRadius.circular(16);
+    final activeColor = widget.hoverBorderColor ?? AppTheme.blueAccent;
+    final bgColor = widget.backgroundColor ?? AppTheme.surface;
 
     return MouseRegion(
+      hitTestBehavior: HitTestBehavior.opaque,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
-      child: AnimatedContainer(
+      child: AnimatedScale(
+        scale: _isHovered ? 1.025 : 1.0,
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOutCubic,
-        transform: _isHovered
-            ? Matrix4.diagonal3Values(1.015, 1.015, 1.0)
-            : Matrix4.identity(),
-        decoration: BoxDecoration(
-          borderRadius: effectiveBorderRadius,
-          boxShadow: _isHovered
-              ? [
-                  BoxShadow(
-                    color: (widget.hoverBorderColor ?? AppTheme.cyanAccent)
-                        .withValues(alpha: 0.15),
-                    blurRadius: 20,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 4),
-                  )
-                ]
-              : [],
-          border: Border.all(
-            color: borderColor,
-            width: _isHovered ? 1.5 : 1.0,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOutCubic,
+          decoration: BoxDecoration(
+            color: _isHovered ? AppTheme.surfaceLight : bgColor,
+            borderRadius: borderRadius,
+            border: Border.all(
+              color: _isHovered ? activeColor : AppTheme.cardBorder,
+              width: _isHovered ? 2.0 : 1.0,
+            ),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                      color: activeColor.withValues(alpha: 0.35),
+                      blurRadius: 24,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 8),
+                    ),
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.08),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    )
+                  ],
           ),
+          child: widget.child,
         ),
-        child: widget.child,
       ),
     );
   }

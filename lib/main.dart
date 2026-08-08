@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'models/portfolio_data.dart';
 import 'theme/app_theme.dart';
 import 'widgets/about_section.dart';
@@ -10,6 +9,7 @@ import 'widgets/hero_section.dart';
 import 'widgets/navbar.dart';
 import 'widgets/projects_section.dart';
 import 'widgets/research_section.dart';
+import 'widgets/resume_request_modal.dart';
 import 'widgets/skills_section.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class PortfolioApp extends StatelessWidget {
     return MaterialApp(
       title: '${PortfolioData.name} | Senior Machine Learning & Data Engineer',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
       home: const PortfolioHomePage(),
     );
   }
@@ -59,13 +59,6 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
     }
   }
 
-  Future<void> _launchUrl(String urlString) async {
-    final Uri uri = Uri.parse(urlString);
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      debugPrint('Could not launch $urlString');
-    }
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -75,6 +68,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.background,
       appBar: Navbar(
         onNavItemSelected: _scrollToSection,
         activeIndex: _activeSectionIndex,
@@ -104,15 +98,24 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
             const Divider(color: AppTheme.cardBorder, height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.cyanAccent,
-                foregroundColor: Colors.black,
+                backgroundColor: AppTheme.blueAccent,
+                foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               onPressed: () {
                 Navigator.pop(context);
-                _launchUrl('mailto:${PortfolioData.email}');
+                ResumeRequestModal.show(context);
               },
-              child: const Text('Contact Me'),
+              child: const Text(
+                'Request Resume',
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

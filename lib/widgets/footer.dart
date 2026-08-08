@@ -47,18 +47,19 @@ class Footer extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 6),
                             decoration: BoxDecoration(
                               gradient: AppTheme.cyanBlueGradient,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text(
                               'MRC',
                               style: TextStyle(
                                 fontFamily: 'Outfit',
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
+                                color: Colors.white,
+                                fontSize: 15,
                               ),
                             ),
                           ),
@@ -98,72 +99,38 @@ class Footer extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _socialIconButton(
+                      _footerSocialButton(
                         icon: FontAwesomeIcons.linkedin,
                         tooltip: 'LinkedIn',
                         onPressed: () => _launchUrl(PortfolioData.linkedin),
                       ),
                       const SizedBox(width: 12),
-                      _socialIconButton(
+                      _footerSocialButton(
                         icon: FontAwesomeIcons.github,
                         tooltip: 'GitHub',
                         onPressed: () => _launchUrl(PortfolioData.github),
                       ),
                       const SizedBox(width: 12),
-                      _socialIconButton(
+                      _footerSocialButton(
                         icon: FontAwesomeIcons.graduationCap,
                         tooltip: 'Google Scholar',
                         onPressed: () => _launchUrl(PortfolioData.scholar),
-                      ),
-                      const SizedBox(width: 12),
-                      _socialIconButton(
-                        icon: FontAwesomeIcons.envelope,
-                        tooltip: 'Email Me',
-                        onPressed: () =>
-                            _launchUrl('mailto:${PortfolioData.email}'),
                       ),
                     ],
                   ),
                 ],
               ),
               const SizedBox(height: 40),
-              const Divider(color: AppTheme.cardBorder, height: 1),
+              const Divider(color: AppTheme.cardBorder),
               const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '© ${DateTime.now().year} Mohammed Rashid Chowdhury. All rights reserved.',
-                    style: const TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 13,
-                      color: AppTheme.textMuted,
-                    ),
-                  ),
-                  Row(
-                    children: const [
-                      Text(
-                        'Built with ',
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 13,
-                          color: AppTheme.textMuted,
-                        ),
-                      ),
-                      FlutterLogo(size: 14),
-                      SizedBox(width: 4),
-                      Text(
-                        'Flutter Web & Dart',
-                        style: TextStyle(
-                          fontFamily: 'FiraCode',
-                          fontSize: 12,
-                          color: AppTheme.cyanAccent,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+              Text(
+                '© 2026 Mohammed Rashid Chowdhury. Built with Flutter Web & Dart.',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 13,
+                  color: AppTheme.textMuted,
+                ),
               ),
             ],
           ),
@@ -172,7 +139,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _socialIconButton({
+  Widget _footerSocialButton({
     required dynamic icon,
     required String tooltip,
     required VoidCallback onPressed,
@@ -184,9 +151,10 @@ class Footer extends StatelessWidget {
         border: Border.all(color: AppTheme.cardBorder),
       ),
       child: IconButton(
-        icon: FaIcon(icon, size: 18, color: AppTheme.cyanAccent),
+        icon: FaIcon(icon, size: 18, color: AppTheme.textSecondary),
         tooltip: tooltip,
         onPressed: onPressed,
+        hoverColor: AppTheme.blueAccent.withValues(alpha: 0.1),
       ),
     );
   }
